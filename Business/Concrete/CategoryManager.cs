@@ -1,6 +1,8 @@
 ﻿using Business.Abstract;
+using Business.BussinessAspecs.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -22,7 +24,7 @@ namespace Business.Concrete
             _categoryDal = categoryDal;
         }
 
-
+        [SecuredOperation("product.add,admin")]
         [ValidationAspect(typeof(CategoryValidator))]
         public IResult Add(Category category)
         {
@@ -30,22 +32,28 @@ namespace Business.Concrete
             return new SuccessDataResult<Category>(category,CategoryMessages.CategoryAdded);
         }
 
+
+        [SecuredOperation("product.add,admin")]
         public IResult Delete(Category category)
         {
             _categoryDal.Delete(category);
             return new SuccessDataResult<Category>(CategoryMessages.CategoryDeleted);
         }
 
+        [CacheAspect]
         public IDataResult<List<Category>> GetAll()
         {
             return new SuccessDataResult<List<Category>>(_categoryDal.GetAll(),CategoryMessages.CategoryListed);
         }
 
+        [CacheAspect]
         public IDataResult<Category> GetById(int id)
         {
             return new SuccessDataResult<Category>(_categoryDal.Get(p=>p.CategoryId==id));
         }
 
+        [CacheRemoveAspect("IPoductService.Get")]
+        [SecuredOperation("product.add,admin")]
         public IResult Update(Category category)
         {
             if (category ==null)
@@ -55,5 +63,8 @@ namespace Business.Concrete
             _categoryDal.Update(category);
             return new SuccessDataResult<Category>(CategoryMessages.CategoryUpdated);
         }
+
+
+
     }
 }

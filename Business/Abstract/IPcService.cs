@@ -17,6 +17,6 @@ namespace Business.Abstract
         IResult Add(Pc pc);
         IResult Update(Pc pc);
         IResult Delete(Pc pc);
-        IDataResult<List<PcDetailDto>> GetCarDetail();
+        IDataResult<List<PcDetailDto>> GetPcDetails();
     }
 }

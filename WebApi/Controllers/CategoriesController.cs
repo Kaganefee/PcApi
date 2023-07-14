@@ -5,22 +5,21 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
 {
-    
     [Route("api/[controller]")]
     [ApiController]
-    public class PcsController : ControllerBase
+    public class CategoriesController : ControllerBase
     {
-        IPcService _pcService;
+        ICategoryService _categoryService;
 
-        public PcsController(IPcService pcService)
+        public CategoriesController(ICategoryService categoryService)
         {
-            _pcService = pcService;
+            _categoryService = categoryService;
         }
 
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            var result = _pcService.GetAll();
+            var result = _categoryService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
@@ -32,7 +31,7 @@ namespace WebApi.Controllers
 
         public IActionResult GetById(int id)
         {
-            var result = _pcService.GetById(id);
+            var result = _categoryService.GetById(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -42,9 +41,9 @@ namespace WebApi.Controllers
 
         [HttpPost("add")]
 
-        public IActionResult Add(Pc pc)
+        public IActionResult Add(Category category)
         {
-            var result = _pcService.Add(pc);
+            var result = _categoryService.Add(category);
             if (result.Success)
             {
                 return Ok(result);
@@ -55,8 +54,8 @@ namespace WebApi.Controllers
         [HttpDelete("delete")]
         public IActionResult Delete(int id)
         {
-            var item = _pcService.GetById(id);
-            var result =_pcService.Delete(item.Data);
+            var item = _categoryService.GetById(id);
+            var result = _categoryService.Delete(item.Data);
 
             if (result.Success)
             {
@@ -68,20 +67,9 @@ namespace WebApi.Controllers
         [HttpPatch("update")]
         public IActionResult Update(int id)
         {
-            var item = _pcService.GetById(id);
-            var result = _pcService.Update(item.Data);
+            var item = _categoryService.GetById(id);
+            var result = _categoryService.Update(item.Data);
 
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
-
-        [HttpGet("getpcdetail")]
-        public IActionResult GetPcDetails(int id) 
-        {
-            var result = _pcService.GetPcDetails();
             if (result.Success)
             {
                 return Ok(result);
@@ -90,3 +78,4 @@ namespace WebApi.Controllers
         }
     }
 }
+
