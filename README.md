@@ -13,12 +13,3 @@
 - Cross Cutting Concerns: Projede kullanılan çapraz kesen endişeler (ör. loglama, hata yönetimi) ayrı modüllerde ele alınmış ve tekrar kullanılabilirlik sağlanmıştır.
 - Repository Design Pattern: Veri erişim katmanında kullanılan Repository tasarım deseni, veri işlemlerinin yönetimini kolaylaştırmak için kullanılmıştır.
 
-## Kurulum
-
-1. Projeyi klonlayın veya ZIP olarak indirin.
-2. Visual Studio veya tercih ettiğiniz C# IDE'sini açın.
-3. Proje dosyasını (PcApi.csproj) açın.
-4. Proje bağımlılıklarını geri yüklemek için NuGet Paket Yöneticisi'ni kullanın.
-5. MSSQL veritabanını oluşturun ve bağlantı dizesini `appsettings.json` dosyasında güncelleyin.
-6. Proje içerisindeki migration'ları çalıştırarak veritabanını güncelleyin.
-7. Projeyi çalıştırın ve API'ye erişim sağlayın.
