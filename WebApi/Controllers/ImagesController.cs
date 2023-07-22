@@ -66,13 +66,12 @@ namespace WebApi.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("delete")]
-        public IActionResult Delete(Image image)
+        [HttpDelete("delete")]
+        public IActionResult Delete(int id)
         {
+            var item = _ımageService.GetById(id);
+            var result = _ımageService.Delete(item.Data);
 
-            var selectedImage = _ımageService.GetById(image.ImageId);
-
-            var result = _ımageService.Delete(selectedImage.Data);
             if (result.Success)
             {
                 return Ok(result);
